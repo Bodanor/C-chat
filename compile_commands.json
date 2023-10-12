@@ -1,0 +1,63 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-DDEBUG",
+      "-g",
+      "-Iinclude",
+      "-c",
+      "-o",
+      ".build/sockets.o",
+      "src/sockets.c"
+    ],
+    "directory": "/home/liwinux/Desktop/chat/lib/libsockets",
+    "file": "/home/liwinux/Desktop/chat/lib/libsockets/src/sockets.c",
+    "output": "/home/liwinux/Desktop/chat/lib/libsockets/.build/sockets.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-std=gnu89",
+      "-g",
+      "-DDEBUG",
+      "-I/usr/include/mysql",
+      "-I../lib/libsockets/include",
+      "-I../include",
+      "-I../src",
+      "-I.",
+      "-c",
+      "-o",
+      ".build/main.o",
+      "main.c"
+    ],
+    "directory": "/home/liwinux/Desktop/chat/Server",
+    "file": "/home/liwinux/Desktop/chat/Server/main.c",
+    "output": "/home/liwinux/Desktop/chat/Server/.build/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-std=gnu89",
+      "-g",
+      "-DDEBUG",
+      "-I/usr/include/mysql",
+      "-I../lib/libsockets/include",
+      "-I../include",
+      "-I.",
+      "-c",
+      "-o",
+      ".build/chat.o",
+      "chat.c"
+    ],
+    "directory": "/home/liwinux/Desktop/chat/src",
+    "file": "/home/liwinux/Desktop/chat/src/chat.c",
+    "output": "/home/liwinux/Desktop/chat/src/.build/chat.o"
+  }
+]
