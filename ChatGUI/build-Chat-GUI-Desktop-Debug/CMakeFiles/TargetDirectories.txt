@@ -1,0 +1,8 @@
+/home/liwinux/Desktop/chat/ChatGUI/build-Chat-GUI-Desktop-Debug/CMakeFiles/Chat-GUI.dir
+/home/liwinux/Desktop/chat/ChatGUI/build-Chat-GUI-Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/liwinux/Desktop/chat/ChatGUI/build-Chat-GUI-Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/liwinux/Desktop/chat/ChatGUI/build-Chat-GUI-Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/liwinux/Desktop/chat/ChatGUI/build-Chat-GUI-Desktop-Debug/CMakeFiles/install.dir
+/home/liwinux/Desktop/chat/ChatGUI/build-Chat-GUI-Desktop-Debug/CMakeFiles/install/local.dir
+/home/liwinux/Desktop/chat/ChatGUI/build-Chat-GUI-Desktop-Debug/CMakeFiles/install/strip.dir
+/home/liwinux/Desktop/chat/ChatGUI/build-Chat-GUI-Desktop-Debug/CMakeFiles/Chat-GUI_autogen.dir

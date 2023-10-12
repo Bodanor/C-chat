@@ -1,0 +1,1 @@
+/usr/bin/g++ -DQT_QML_DEBUG -g "CMakeFiles/Chat-GUI.dir/Chat-GUI_autogen/mocs_compilation.cpp.o" "CMakeFiles/Chat-GUI.dir/main.cpp.o" "CMakeFiles/Chat-GUI.dir/mainwindow.cpp.o" -o Chat-GUI  /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.8 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.8 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.8 
