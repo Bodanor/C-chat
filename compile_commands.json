@@ -1,6 +1,67 @@
 [
   {
     "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-DDEBUG",
+      "-g",
+      "-Iinclude",
+      "-c",
+      "-o",
+      ".build/sockets.o",
+      "src/sockets.c"
+    ],
+    "directory": "/home/liwinux/Desktop/c-chat/lib/libsockets",
+    "file": "/home/liwinux/Desktop/c-chat/lib/libsockets/src/sockets.c",
+    "output": "/home/liwinux/Desktop/c-chat/lib/libsockets/.build/sockets.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-std=gnu89",
+      "-g",
+      "-DDEBUG",
+      "-I/usr/include/mysql",
+      "-I../lib/libsockets/include",
+      "-I../include",
+      "-I../src",
+      "-I.",
+      "-c",
+      "-o",
+      ".build/main.o",
+      "main.c"
+    ],
+    "directory": "/home/liwinux/Desktop/c-chat/Server",
+    "file": "/home/liwinux/Desktop/c-chat/Server/main.c",
+    "output": "/home/liwinux/Desktop/c-chat/Server/.build/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-std=gnu89",
+      "-g",
+      "-DDEBUG",
+      "-I/usr/include/mysql",
+      "-I../lib/libsockets/include",
+      "-I../include",
+      "-I.",
+      "-c",
+      "-o",
+      ".build/chat.o",
+      "chat.c"
+    ],
+    "directory": "/home/liwinux/Desktop/c-chat/src",
+    "file": "/home/liwinux/Desktop/c-chat/src/chat.c",
+    "output": "/home/liwinux/Desktop/c-chat/src/.build/chat.o"
+  },
+  {
+    "arguments": [
       "/usr/bin/g++",
       "-Wno-unused-parameter",
       "-pipe",
@@ -19,7 +80,39 @@
       "-I/usr/include/qt5",
       "-I/usr/include/qt5/QtGui",
       "-I/usr/include/qt5/QtCore",
-      "-I/usr/include/mysql",
+      "-I../lib/libsockets/include",
+      "-I../include",
+      "-I../src",
+      "-I.",
+      "-c",
+      "-o",
+      ".build/main.o",
+      "main.cpp"
+    ],
+    "directory": "/home/liwinux/Desktop/c-chat/ChatGUI",
+    "file": "/home/liwinux/Desktop/c-chat/ChatGUI/main.cpp",
+    "output": "/home/liwinux/Desktop/c-chat/ChatGUI/.build/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wno-unused-parameter",
+      "-pipe",
+      "-g",
+      "-std=gnu++11",
+      "-Wall",
+      "-W",
+      "-D_REENTRANT",
+      "-fPIC",
+      "-DQT_DEPRECATED_WARNINGS",
+      "-DQT_QML_DEBUG",
+      "-DQT_WIDGETS_LIB",
+      "-DQT_GUI_LIB",
+      "-DQT_CORE_LIB",
+      "-I/usr/include/qt5/QtWidgets",
+      "-I/usr/include/qt5",
+      "-I/usr/include/qt5/QtGui",
+      "-I/usr/include/qt5/QtCore",
       "-I../lib/libsockets/include",
       "-I../include",
       "-I../src",
@@ -29,8 +122,41 @@
       ".build/mainwindow.o",
       "mainwindow.cpp"
     ],
-    "directory": "/home/liwinux/Desktop/c-chat/ChatGUI/Chat-GUI",
-    "file": "/home/liwinux/Desktop/c-chat/ChatGUI/Chat-GUI/mainwindow.cpp",
-    "output": "/home/liwinux/Desktop/c-chat/ChatGUI/Chat-GUI/.build/mainwindow.o"
+    "directory": "/home/liwinux/Desktop/c-chat/ChatGUI",
+    "file": "/home/liwinux/Desktop/c-chat/ChatGUI/mainwindow.cpp",
+    "output": "/home/liwinux/Desktop/c-chat/ChatGUI/.build/mainwindow.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-Wno-unused-parameter",
+      "-pipe",
+      "-g",
+      "-std=gnu++11",
+      "-Wall",
+      "-W",
+      "-D_REENTRANT",
+      "-fPIC",
+      "-DQT_DEPRECATED_WARNINGS",
+      "-DQT_QML_DEBUG",
+      "-DQT_WIDGETS_LIB",
+      "-DQT_GUI_LIB",
+      "-DQT_CORE_LIB",
+      "-I/usr/include/qt5/QtWidgets",
+      "-I/usr/include/qt5",
+      "-I/usr/include/qt5/QtGui",
+      "-I/usr/include/qt5/QtCore",
+      "-I../lib/libsockets/include",
+      "-I../include",
+      "-I../src",
+      "-I.",
+      "-c",
+      "-o",
+      ".build/moc_mainwindow.o",
+      "moc_mainwindow.cpp"
+    ],
+    "directory": "/home/liwinux/Desktop/c-chat/ChatGUI",
+    "file": "/home/liwinux/Desktop/c-chat/ChatGUI/moc_mainwindow.cpp",
+    "output": "/home/liwinux/Desktop/c-chat/ChatGUI/.build/moc_mainwindow.o"
   }
 ]

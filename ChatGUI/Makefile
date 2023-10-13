@@ -3,7 +3,7 @@ NAME        := ChatGUI
 BIN_DIR := ../bin
 
 LIBS        := pthread Qt5Widgets Qt5Gui Qt5Core GL sockets
-LIBS_TARGET := ../lib/libsockets/
+LIBS_TARGET := ../lib/libsockets/libsockets.a
 
 
 INCS        := 	/usr/include/qt5/QtWidgets\

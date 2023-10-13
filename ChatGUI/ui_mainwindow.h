@@ -22,6 +22,10 @@
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 
+extern "C" {
+#include "chat.h"
+#include "sockets.h"
+}
 QT_BEGIN_NAMESPACE
 
 class Ui_MainWindow
@@ -42,6 +46,7 @@ public:
 
     void setupUi(QMainWindow *MainWindow)
     {
+
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(1310, 585);
