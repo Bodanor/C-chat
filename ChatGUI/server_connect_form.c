@@ -34,3 +34,12 @@ void PingButton_clicked_cb(GtkButton *b, gpointer user_data)
 {
 
 }
+
+void show_connect_form(void)
+{
+    gtk_widget_show(c_chat_window);
+    gtk_window_set_transient_for(GTK_WINDOW(server_form_window), GTK_WINDOW(c_chat_window));
+    gtk_widget_show(server_form_window);
+    gtk_main ();
+
+}

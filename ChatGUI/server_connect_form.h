@@ -4,6 +4,8 @@
 #include <gtk-3.0/gtk/gtk.h>
 #include <gtk/gtkx.h>
 
+#include "c_chat_ui.h"
+
 #define SERVER_CONNECT_FORM "ServerConnectForm.glade"
 
 
@@ -19,6 +21,6 @@ extern GtkBuilder *server_form_builder;
 void init_server_connect_form(void);
 void ConnectButton_clicked_cb(GtkButton *b, gpointer user_data);
 void PingButton_clicked_cb(GtkButton *b, gpointer user_data);
-
+void show_connect_form(void);
 
 #endif
