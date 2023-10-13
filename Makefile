@@ -1,4 +1,4 @@
-SUBDIRS := Server
+SUBDIRS := Server ChatGUI
 
 all: $(SUBDIRS)
 

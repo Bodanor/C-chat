@@ -1,30 +1,24 @@
 [
   {
     "arguments": [
-      "/usr/bin/gcc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-DDEBUG",
+      "/usr/bin/g++",
+      "-Wno-unused-parameter",
+      "-pipe",
       "-g",
-      "-Iinclude",
-      "-c",
-      "-o",
-      ".build/sockets.o",
-      "src/sockets.c"
-    ],
-    "directory": "/home/liwinux/Desktop/chat/lib/libsockets",
-    "file": "/home/liwinux/Desktop/chat/lib/libsockets/src/sockets.c",
-    "output": "/home/liwinux/Desktop/chat/lib/libsockets/.build/sockets.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/gcc",
+      "-std=gnu++11",
       "-Wall",
-      "-Wextra",
-      "-std=gnu89",
-      "-g",
-      "-DDEBUG",
+      "-W",
+      "-D_REENTRANT",
+      "-fPIC",
+      "-DQT_DEPRECATED_WARNINGS",
+      "-DQT_QML_DEBUG",
+      "-DQT_WIDGETS_LIB",
+      "-DQT_GUI_LIB",
+      "-DQT_CORE_LIB",
+      "-I/usr/include/qt5/QtWidgets",
+      "-I/usr/include/qt5",
+      "-I/usr/include/qt5/QtGui",
+      "-I/usr/include/qt5/QtCore",
       "-I/usr/include/mysql",
       "-I../lib/libsockets/include",
       "-I../include",
@@ -32,32 +26,11 @@
       "-I.",
       "-c",
       "-o",
-      ".build/main.o",
-      "main.c"
+      ".build/mainwindow.o",
+      "mainwindow.cpp"
     ],
-    "directory": "/home/liwinux/Desktop/chat/Server",
-    "file": "/home/liwinux/Desktop/chat/Server/main.c",
-    "output": "/home/liwinux/Desktop/chat/Server/.build/main.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/gcc",
-      "-Wall",
-      "-Wextra",
-      "-std=gnu89",
-      "-g",
-      "-DDEBUG",
-      "-I/usr/include/mysql",
-      "-I../lib/libsockets/include",
-      "-I../include",
-      "-I.",
-      "-c",
-      "-o",
-      ".build/chat.o",
-      "chat.c"
-    ],
-    "directory": "/home/liwinux/Desktop/chat/src",
-    "file": "/home/liwinux/Desktop/chat/src/chat.c",
-    "output": "/home/liwinux/Desktop/chat/src/.build/chat.o"
+    "directory": "/home/liwinux/Desktop/c-chat/ChatGUI/Chat-GUI",
+    "file": "/home/liwinux/Desktop/c-chat/ChatGUI/Chat-GUI/mainwindow.cpp",
+    "output": "/home/liwinux/Desktop/c-chat/ChatGUI/Chat-GUI/.build/mainwindow.o"
   }
 ]
