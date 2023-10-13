@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkImage" id="ConnectImage">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="stock">gtk-yes</property>
+  </object>
+  <object class="GtkImage" id="PingImage">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="stock">gtk-info</property>
+  </object>
+  <object class="GtkWindow" id="ServerConnectionForm">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="has-focus">True</property>
+    <property name="resizable">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">baseline</property>
+                <property name="margin-start">60</property>
+                <property name="label" translatable="yes">Server IP: </property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans Bold 10"/>
+                  <attribute name="underline" value="True"/>
+                  <attribute name="foreground" value="#9a9a99999696"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="IPLineEdit">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="margin-end">50</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">end</property>
+                <property name="label" translatable="yes">Server Port : </property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans Bold 10"/>
+                  <attribute name="underline" value="True"/>
+                  <attribute name="foreground" value="#86865e5e3c3c"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="PortLineEdit">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="margin-end">60</property>
+                <property name="max-length">5</property>
+                <property name="input-purpose">digits</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="spacing">60</property>
+            <property name="homogeneous">True</property>
+            <child>
+              <object class="GtkButton" id="ConnectButton">
+                <property name="label" translatable="yes">Connect</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="margin-start">50</property>
+                <property name="image">ConnectImage</property>
+                <property name="always-show-image">True</property>
+                <signal name="clicked" handler="ConnectButton_clicked_cb" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="PingButton">
+                <property name="label" translatable="yes">Ping</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="margin-end">50</property>
+                <property name="image">PingImage</property>
+                <property name="always-show-image">True</property>
+                <signal name="clicked" handler="PingButton_clicked_cb" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="padding">16</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="ConnectionStatusLabel">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkProgressBar" id="ConnectionStatusProgressBar">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">center</property>
+            <property name="margin-bottom">1</property>
+            <property name="text" translatable="yes">Connection Status</property>
+            <property name="show-text">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -2,18 +2,26 @@
 <!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <object class="GtkImage" id="SendImage">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="stock">gtk-goto-top</property>
+  </object>
   <object class="GtkImage" id="image1">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="stock">gtk-no</property>
+    <property name="stock">gtk-cancel</property>
   </object>
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="stock">gtk-yes</property>
+    <property name="stock">gtk-network</property>
   </object>
-  <object class="GtkWindow">
+  <object class="GtkWindow" id="C-Chat">
     <property name="can-focus">False</property>
+    <property name="title" translatable="yes">C-Chat</property>
+    <property name="default-width">500</property>
+    <property name="default-height">500</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -23,6 +31,7 @@
           <object class="GtkMenuBar">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="margin-bottom">4</property>
             <child>
               <object class="GtkMenuItem" id="DropDownMenuItem">
                 <property name="visible">True</property>
@@ -40,10 +49,11 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkImageMenuItem">
+                      <object class="GtkImageMenuItem" id="NewConnectionMenuBar">
                         <property name="label" translatable="yes">New connection</property>
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
+                        <property name="use-underline">True</property>
                         <property name="image">image2</property>
                         <property name="use-stock">False</property>
                         <property name="always-show-image">True</property>
@@ -51,10 +61,11 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkImageMenuItem">
+                      <object class="GtkImageMenuItem" id="DisconnectMenuBar">
                         <property name="label" translatable="yes">Disconnect</property>
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
+                        <property name="use-underline">True</property>
                         <property name="image">image1</property>
                         <property name="use-stock">False</property>
                         <property name="always-show-image">True</property>
@@ -62,7 +73,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkImageMenuItem">
+                      <object class="GtkImageMenuItem" id="QuitmenuBar">
                         <property name="label">gtk-quit</property>
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
@@ -78,7 +89,7 @@
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
@@ -88,13 +99,20 @@
           <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">4</property>
             <property name="column-homogeneous">True</property>
             <child>
               <object class="GtkLabel" id="PingLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">end</property>
+                <property name="margin-end">2</property>
                 <property name="label" translatable="yes">Ping : 22ms</property>
+                <attributes>
+                  <attribute name="font-desc" value="Symbola Semi-Condensed 12"/>
+                  <attribute name="foreground" value="#1a1a5f5fb4b4"/>
+                </attributes>
               </object>
               <packing>
                 <property name="left-attach">1</property>
@@ -106,7 +124,12 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
+                <property name="margin-start">1</property>
                 <property name="label" translatable="yes">Status : Connected</property>
+                <attributes>
+                  <attribute name="font-desc" value="Serif 12"/>
+                  <attribute name="foreground" value="#2626a2a26969"/>
+                </attributes>
               </object>
               <packing>
                 <property name="left-attach">0</property>
@@ -151,6 +174,7 @@
               <object class="GtkEntry" id="InputMessage">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
+                <property name="primary-icon-stock">gtk-edit</property>
                 <property name="placeholder-text" translatable="yes">Message :</property>
                 <signal name="activate" handler="send_on_button_clicked" swapped="no"/>
               </object>
@@ -166,6 +190,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <property name="image">SendImage</property>
                 <property name="use-underline">True</property>
                 <property name="always-show-image">True</property>
                 <signal name="clicked" handler="send_on_button_clicked" swapped="no"/>
