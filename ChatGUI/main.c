@@ -3,23 +3,20 @@
 #include <gtk-3.0/gtk/gtk.h>
 #include <gtk/gtkx.h>
 
-#include "c_chat.h"
+#include "c_chat_ui.h"
+#include "server_connect_form.h"
 
 int main(int argc, char *argv[])
 {
-    GtkWidget *c_chat_window;
-    GtkBuilder *builder;
-
     /* Initialize gtk+*/
     gtk_init (&argc, &argv);
 
-    builder = gtk_builder_new_from_file (C_CHAT_UI_FILE);
+    init_server_connect_form();
+   // init_c_chat_window();
 
-    c_chat_window = GTK_WIDGET (gtk_builder_get_object (builder, "C-Chat"));
-    gtk_builder_connect_signals (builder, NULL);
-    g_signal_connect(c_chat_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-    gtk_widget_show (c_chat_window);
-
+    //gtk_widget_show(c_chat_window);
+    //gtk_window_set_transient_for(GTK_WINDOW(server_form_window), GTK_WINDOW(c_chat_window));
+    //gtk_widget_show(server_form_window);
     gtk_main ();
     return 0;
 

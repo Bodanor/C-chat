@@ -25,7 +25,7 @@ OBJS        := $(LOCAL_OBJS)
 DEPS        := $(OBJS:.o=.d) $(EXTERNAL_OBJS:.o=.d)
 
 CC          := gcc
-CFLAGS      := -g -Wall -Wextra `pkg-config --cflags --libs gtk+-3.0`
+CFLAGS      := -g -Wall -Wextra `pkg-config --cflags --libs gtk+-3.0` -rdynamic
 
 CPPFLAGS    := $(addprefix -I,$(INCS))
 LDFLAGS     := $(addprefix -L,$(dir $(LIBS_TARGET)))

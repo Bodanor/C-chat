@@ -22,6 +22,7 @@
     <property name="title" translatable="yes">C-Chat</property>
     <property name="default-width">500</property>
     <property name="default-height">500</property>
+    <property name="focus-on-map">False</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
