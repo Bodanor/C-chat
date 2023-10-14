@@ -11,9 +11,20 @@ static GtkWidget *DropDownMenuItem;
 static GtkWidget *NewConnectionMenuBar;
 static GtkWidget *DisconnectMenuBar;
 static GtkWidget *QuitmenuBar;
+static GtkWidget *ScrolledWindow;
 static GtkBuilder *c_chat_builder;
+static pthread_t thread_recv;
+static pthread_mutex_t mutex_history_chat;
+static pthread_mutex_t mutex_ping_label;
+static pthread_mutex_t mutex_status_label;
 
 static void close_button_clicked(void);
+static void *_recv_function();
+static void disconnected_status(void);
+static void connected_status(void);
+static void clear_ping(void);
+static void append_to_history(const char *text);
+static void clear_c_chat_elements(void);
 
 void init_c_chat_window(void)
 {
@@ -31,18 +42,38 @@ void init_c_chat_window(void)
     NewConnectionMenuBar = GTK_WIDGET(gtk_builder_get_object(c_chat_builder, "NewConnectionMenuBar"));
     DisconnectMenuBar = GTK_WIDGET(gtk_builder_get_object(c_chat_builder, "DisconnectMenuBar"));
     QuitmenuBar = GTK_WIDGET(gtk_builder_get_object(c_chat_builder, "QuitmenuBar"));
+    ScrolledWindow = GTK_WIDGET(gtk_builder_get_object(c_chat_builder, "ScrolledWindow"));
+    pthread_mutex_init(&mutex_history_chat, NULL);
+    pthread_mutex_init(&mutex_ping_label, NULL);
+    pthread_mutex_init(&mutex_status_label, NULL);
 
 }
-
 
 
 void send_on_button_clicked(GtkButton *b, gpointer user_data)
 {
+    int error_status;
+    const gchar *message;
+
+    message = gtk_entry_get_text(GTK_ENTRY(InputMessage));
+
+    error_status = Send_msg(server_socket, (const uint8_t*)message, strlen((const char*)message) + 1);
+    if (error_status < 0) {
+        disconnected_status();
+        clear_ping();
+    }
+    else {
+        append_to_history((const char*)message);
+    }
+
+    gtk_entry_set_text(GTK_ENTRY(InputMessage), ""); /* Clear the Input entry */
 
 }
 void new_connection_on_clicked(GtkMenuItem *b, gpointer user_data)
 {
+    c_chat_stopper();
     show_connect_form();
+    clear_c_chat_elements();
     close(server_socket);
 
 }
@@ -53,6 +84,8 @@ void disconnect_on_clicked(GtkMenuItem *b, gpointer user_data)
 }
 void quit_on_clicked(GtkMenuItem *b, gpointer user_data)
 {
+    c_chat_stopper();
+    clear_c_chat_elements();
     close(server_socket);
     gtk_main_quit();
 }
@@ -66,7 +99,120 @@ void show_c_chat_ui(void)
 
 void close_button_clicked(void)
 {
+    c_chat_stopper();
     close(server_socket);
+    clear_c_chat_elements();
     show_c_chat_ui();
     show_connect_form();
+}
+
+void c_chat_starter(void)
+{
+    pthread_create(&thread_recv, NULL, (void*(*)(void*))_recv_function, NULL);
+    pthread_detach(thread_recv);
+    connected_status();
+}
+void c_chat_stopper(void)
+{
+    pthread_cancel(thread_recv);
+}
+
+static void *_recv_function()
+{
+    Message *msg;
+    int error_status;
+
+    pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+    pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+    pthread_testcancel();
+
+    while (1) {
+        msg = NULL;
+        error_status = Receive_msg(server_socket, &msg);
+        if (error_status < 0) {
+            disconnected_status();
+            clear_ping();
+        }
+        else {
+            append_to_history((const char*)msg->data);
+            destroyMessage(msg);
+        }
+    }
+
+}
+
+static void disconnected_status(void)
+{
+    PangoAttrList *attr_list;
+    PangoAttribute *attr;
+
+    attr_list = pango_attr_list_new();
+    attr = pango_attr_foreground_new(65535, 0, 0);
+    pango_attr_list_insert(attr_list, attr);
+    gtk_label_set_attributes(GTK_LABEL(StatusLabel), attr_list);
+
+    pthread_mutex_lock(&mutex_status_label);
+    gtk_label_set_text(GTK_LABEL(StatusLabel), "Disconnected");
+    pthread_mutex_unlock(&mutex_status_label);
+
+}
+static void connected_status(void)
+{
+    PangoAttrList *attr_list;
+    PangoAttribute *attr;
+
+    attr_list = pango_attr_list_new();
+    attr = pango_attr_foreground_new(0, 65535, 0);
+    pango_attr_list_insert(attr_list, attr);
+    gtk_label_set_attributes(GTK_LABEL(StatusLabel), attr_list);
+
+    pthread_mutex_lock(&mutex_status_label);
+    gtk_label_set_text(GTK_LABEL(StatusLabel), "Connected");
+    pthread_mutex_unlock(&mutex_status_label);
+}
+static void clear_ping(void)
+{
+    pthread_mutex_lock(&mutex_ping_label);
+    gtk_label_set_text(GTK_LABEL(PingLabel), "");
+    pthread_mutex_unlock(&mutex_ping_label);
+}
+
+static void append_to_history(const char *text)
+{
+    GtkTextBuffer *history_buffer;
+    GtkTextIter iter;
+
+    pthread_mutex_lock(&mutex_history_chat);
+
+    history_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(HistoryChat));
+    gtk_text_buffer_get_end_iter(history_buffer, &iter);
+    gtk_text_buffer_insert(history_buffer, &iter, (const gchar*)text, -1);
+    gtk_text_buffer_insert(history_buffer, &iter, "\n", -1);
+
+    GtkAdjustment *v_adjustment = gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(ScrolledWindow));
+    gtk_adjustment_set_value(v_adjustment, gtk_adjustment_get_upper(v_adjustment));
+
+    pthread_mutex_unlock(&mutex_history_chat);
+}
+
+void clear_c_chat_elements(void)
+{
+    GtkTextBuffer *buffer;
+
+
+    pthread_mutex_lock(&mutex_ping_label);
+    gtk_label_set_text(GTK_LABEL(PingLabel), "");
+    pthread_mutex_unlock(&mutex_ping_label);
+
+    pthread_mutex_lock(&mutex_status_label);
+    pthread_mutex_unlock(&mutex_status_label);
+    gtk_label_set_text(GTK_LABEL(StatusLabel), "");
+
+
+    pthread_mutex_lock(&mutex_history_chat);
+    buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(HistoryChat));
+    gtk_text_buffer_set_text(buffer, "", -1);
+    pthread_mutex_unlock(&mutex_history_chat);
+
+    gtk_entry_set_text(GTK_ENTRY(InputMessage), "");
 }

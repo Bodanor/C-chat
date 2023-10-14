@@ -142,6 +142,7 @@ void try_server_connect(void)
     else {
         gtk_label_set_text(GTK_LABEL(ConnectionStatusLabel), ""); /* Clear the status label before exiting */
         unshow_connect_form();
+        c_chat_starter();
     }
 
     pthread_cleanup_pop(1);

@@ -96,28 +96,21 @@
           </packing>
         </child>
         <child>
-          <!-- n-columns=2 n-rows=1 -->
-          <object class="GtkGrid">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-top">10</property>
-            <property name="margin-bottom">4</property>
-            <property name="column-homogeneous">True</property>
             <child>
-              <object class="GtkLabel" id="PingLabel">
+              <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="halign">end</property>
-                <property name="margin-end">2</property>
-                <property name="label" translatable="yes">Ping : 22ms</property>
-                <attributes>
-                  <attribute name="font-desc" value="Symbola Semi-Condensed 12"/>
-                  <attribute name="foreground" value="#1a1a5f5fb4b4"/>
-                </attributes>
+                <property name="halign">start</property>
+                <property name="margin-start">1</property>
+                <property name="label" translatable="yes">Status : </property>
               </object>
               <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">0</property>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
@@ -125,16 +118,32 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
-                <property name="margin-start">1</property>
-                <property name="label" translatable="yes">Status : Connected</property>
                 <attributes>
                   <attribute name="font-desc" value="Serif 12"/>
                   <attribute name="foreground" value="#2626a2a26969"/>
                 </attributes>
               </object>
               <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">0</property>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="PingLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">end</property>
+                <property name="margin-end">2</property>
+                <attributes>
+                  <attribute name="font-desc" value="Symbola Semi-Condensed 12"/>
+                  <attribute name="foreground" value="#1a1a5f5fb4b4"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
@@ -145,12 +154,15 @@
           </packing>
         </child>
         <child>
-          <object class="GtkScrolledWindow">
+          <object class="GtkScrolledWindow" id="ScrolledWindow">
             <property name="width-request">200</property>
             <property name="height-request">200</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="shadow-type">in</property>
+            <property name="kinetic-scrolling">False</property>
+            <property name="propagate-natural-width">True</property>
+            <property name="propagate-natural-height">True</property>
             <child>
               <object class="GtkTextView" id="HistoryChat">
                 <property name="visible">True</property>
@@ -175,6 +187,7 @@
               <object class="GtkEntry" id="InputMessage">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
+                <property name="truncate-multiline">True</property>
                 <property name="primary-icon-stock">gtk-edit</property>
                 <property name="placeholder-text" translatable="yes">Message :</property>
                 <signal name="activate" handler="send_on_button_clicked" swapped="no"/>

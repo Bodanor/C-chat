@@ -18,4 +18,6 @@ void new_connection_on_clicked(GtkMenuItem *b, gpointer user_data);
 void disconnect_on_clicked(GtkMenuItem *b, gpointer user_data);
 void quit_on_clicked(GtkMenuItem *b, gpointer user_data);
 void show_c_chat_ui(void);
+void c_chat_starter(void);
+void c_chat_stopper(void);
 #endif
