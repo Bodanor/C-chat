@@ -9,7 +9,7 @@ GtkWidget *ConnectionStatusLabel;
 GtkWidget *server_form_window;
 GtkBuilder *server_form_builder;
 
-static int server_socket;
+int server_socket;
 static const char *server_ip;
 static int server_port_number;
 static pthread_t thread_connection;
@@ -138,6 +138,9 @@ void try_server_connect(void)
     if (server_socket == -1) {
        server_connect_error();
     }
+    else {
+        unshow_connect_form();
+    }
 
     pthread_cleanup_pop(1);
     pthread_exit(0);
@@ -234,8 +237,15 @@ void PingButton_clicked_cb(GtkButton *b, gpointer user_data)
 
 void show_connect_form(void)
 {
-    gtk_widget_show(c_chat_window);
+    gtk_widget_grab_focus(IPLineEdit);
     gtk_widget_show(server_form_window);
-    gtk_window_present(GTK_WINDOW(server_form_window));
     gtk_window_set_transient_for(GTK_WINDOW(server_form_window), GTK_WINDOW(c_chat_window));
+    gtk_window_present(GTK_WINDOW(server_form_window));
+}
+
+void unshow_connect_form(void)
+{
+    gtk_window_set_transient_for(GTK_WINDOW(server_form_window), NULL);
+    gtk_widget_set_visible(server_form_window, gtk_false());
+    gtk_widget_hide(server_form_window);
 }

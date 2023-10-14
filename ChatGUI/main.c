@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     init_server_connect_form();
     init_c_chat_window();
 
+    show_c_chat_ui();
     show_connect_form();
     gtk_main();
 

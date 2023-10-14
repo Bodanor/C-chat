@@ -20,10 +20,11 @@ extern GtkWidget *ConnectionStatusProgressBar;
 extern GtkWidget *ConnectionStatusLabel;
 extern GtkWidget *server_form_window;
 extern GtkBuilder *server_form_builder;
+extern int server_socket;
 
 void init_server_connect_form(void);
 void ConnectButton_clicked_cb(GtkButton *b, gpointer user_data);
 void PingButton_clicked_cb(GtkButton *b, gpointer user_data);
 void show_connect_form(void);
-
+void unshow_connect_form(void);
 #endif

@@ -6,6 +6,7 @@
 #include <gtk-3.0/gtk/gtk.h>
 #include <gtk/gtkx.h>
 
+#include "server_connect_form.h"
 #define C_CHAT_UI_FILE "C-ChatUI.glade"
 
 extern GtkWidget *InputMessage;
