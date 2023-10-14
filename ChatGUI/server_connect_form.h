@@ -12,14 +12,7 @@
 #define SERVER_CONNECT_FORM "ServerConnectForm.glade"
 
 
-extern GtkWidget *IPLineEdit;
-extern GtkWidget *PortLineEdit;
-extern GtkWidget *ConnectButton;
-extern GtkWidget *PingButton;
-extern GtkWidget *ConnectionStatusProgressBar;
-extern GtkWidget *ConnectionStatusLabel;
 extern GtkWidget *server_form_window;
-extern GtkBuilder *server_form_builder;
 extern int server_socket;
 
 void init_server_connect_form(void);

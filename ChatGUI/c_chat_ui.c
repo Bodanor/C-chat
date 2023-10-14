@@ -1,17 +1,17 @@
 #include "c_chat_ui.h"
 
-
-GtkWidget *InputMessage;
-GtkWidget *SendButton;
-GtkWidget *HistoryChat;
-GtkWidget *StatusLabel;
-GtkWidget *PingLabel;
-GtkWidget *DropDownMenuItem;
-GtkWidget *NewConnectionMenuBar;
-GtkWidget *DisconnectMenuBar;
-GtkWidget *QuitmenuBar;
 GtkWidget *c_chat_window;
-GtkBuilder *c_chat_builder;
+
+static GtkWidget *InputMessage;
+static GtkWidget *SendButton;
+static GtkWidget *HistoryChat;
+static GtkWidget *StatusLabel;
+static GtkWidget *PingLabel;
+static GtkWidget *DropDownMenuItem;
+static GtkWidget *NewConnectionMenuBar;
+static GtkWidget *DisconnectMenuBar;
+static GtkWidget *QuitmenuBar;
+static GtkBuilder *c_chat_builder;
 
 static void close_button_clicked(void);
 

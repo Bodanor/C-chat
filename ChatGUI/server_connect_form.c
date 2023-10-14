@@ -1,15 +1,16 @@
 #include "server_connect_form.h"
 
-GtkWidget *IPLineEdit;
-GtkWidget *PortLineEdit;
-GtkWidget *ConnectButton;
-GtkWidget *PingButton;
-GtkWidget *ConnectionStatusProgressBar;
-GtkWidget *ConnectionStatusLabel;
 GtkWidget *server_form_window;
-GtkBuilder *server_form_builder;
-
 int server_socket;
+
+static GtkWidget *IPLineEdit;
+static GtkWidget *PortLineEdit;
+static GtkWidget *ConnectButton;
+static GtkWidget *PingButton;
+static GtkWidget *ConnectionStatusProgressBar;
+static GtkWidget *ConnectionStatusLabel;
+static GtkBuilder *server_form_builder;
+
 static const char *server_ip;
 static int server_port_number;
 static pthread_t thread_connection;
