@@ -218,7 +218,6 @@ void ConnectButton_clicked_cb(GtkButton *b, gpointer user_data)
 void PingButton_clicked_cb(GtkButton *b, gpointer user_data)
 {
     static int connection_in_progress = 0;
-    printf("CHRIDTOS\n");
     if (check_form_is_valid() == 0) {
         if (connection_in_progress){
             pthread_cancel(thread_connection);
@@ -236,8 +235,7 @@ void PingButton_clicked_cb(GtkButton *b, gpointer user_data)
 void show_connect_form(void)
 {
     gtk_widget_show(c_chat_window);
-    gtk_window_set_transient_for(GTK_WINDOW(server_form_window), GTK_WINDOW(c_chat_window));
     gtk_widget_show(server_form_window);
-    gtk_main ();
-
+    gtk_window_present(GTK_WINDOW(server_form_window));
+    gtk_window_set_transient_for(GTK_WINDOW(server_form_window), GTK_WINDOW(c_chat_window));
 }
