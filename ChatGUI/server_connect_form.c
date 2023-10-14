@@ -139,6 +139,7 @@ void try_server_connect(void)
        server_connect_error();
     }
     else {
+        gtk_label_set_text(GTK_LABEL(ConnectionStatusLabel), ""); /* Clear the status label before exiting */
         unshow_connect_form();
     }
 
