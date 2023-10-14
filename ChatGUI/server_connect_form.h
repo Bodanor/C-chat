@@ -4,7 +4,10 @@
 #include <gtk-3.0/gtk/gtk.h>
 #include <gtk/gtkx.h>
 
+#include "pthread.h"
+#include "util.h"
 #include "c_chat_ui.h"
+#include "sockets.h"
 
 #define SERVER_CONNECT_FORM "ServerConnectForm.glade"
 

@@ -6,8 +6,10 @@ LIBS        := sockets
 LIBS_TARGET := ../lib/libsockets/libsockets.a
 
 
+
 INCS        := 	../include\
-				../lib/libsockets/include
+				../lib/libsockets/include\
+				../src/
 
 LOCAL_SRCS  := $(wildcard *.c) #Tu prends tout les fichiers SRC_DIR#
 BUILD_DIR   := .build
@@ -20,7 +22,7 @@ EXTERNAL_SRCS := $(wildcard $(EXTERNAL_SRC_DIR)/*.c)
 EXTERNAL_OBJS := $(EXTERNAL_SRCS:$(EXTERNAL_SRC_DIR)/%.c=$(EXTERNAL_SRC_DIR)/.build/%.o)
 
 # All object files
-OBJS        := $(LOCAL_OBJS)
+OBJS        := $(LOCAL_OBJS) $(EXTERNAL_OBJS)
 
 DEPS        := $(OBJS:.o=.d) $(EXTERNAL_OBJS:.o=.d)
 

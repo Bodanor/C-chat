@@ -63,8 +63,30 @@
   {
     "arguments": [
       "/usr/bin/gcc",
+      "-Wall",
+      "-Wextra",
+      "-std=gnu89",
+      "-g",
+      "-DDEBUG",
+      "-I/usr/include/mysql",
+      "-I../lib/libsockets/include",
+      "-I../include",
+      "-I.",
+      "-c",
+      "-o",
+      ".build/util.o",
+      "util.c"
+    ],
+    "directory": "/home/liwinux/Desktop/c-chat/src",
+    "file": "/home/liwinux/Desktop/c-chat/src/util.c",
+    "output": "/home/liwinux/Desktop/c-chat/src/.build/util.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
       "-I../include",
       "-I../lib/libsockets/include",
+      "-I../src/",
       "-g",
       "-Wall",
       "-Wextra",
@@ -91,11 +113,11 @@
       "-pthread",
       "-c",
       "-o",
-      ".build/main.o",
-      "main.c"
+      ".build/server_connect_form.o",
+      "server_connect_form.c"
     ],
     "directory": "/home/liwinux/Desktop/c-chat/ChatGUI",
-    "file": "/home/liwinux/Desktop/c-chat/ChatGUI/main.c",
-    "output": "/home/liwinux/Desktop/c-chat/ChatGUI/.build/main.o"
+    "file": "/home/liwinux/Desktop/c-chat/ChatGUI/server_connect_form.c",
+    "output": "/home/liwinux/Desktop/c-chat/ChatGUI/.build/server_connect_form.o"
   }
 ]
