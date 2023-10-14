@@ -130,7 +130,9 @@ void broadcast_message(int client_src_socket, Message *client_message)
     while (tmp_ptr != NULL) {
         if (tmp_ptr->client_socket != client_src_socket) { /* Avoid sending the message back to the original socket */
             if ((send_error = Send_msg(tmp_ptr->client_socket, client_message->data, client_message->data_size)) < 0) {
-                /* An error occured ! */
+                pthread_mutex_unlock(&server->linked_client_list_lock); /* Release the mutex */
+                delete_client(tmp_ptr->client_socket);
+                pthread_mutex_lock(&server->linked_client_list_lock); /* Lock the mutex */
             }
         }
         tmp_ptr = tmp_ptr->next_client;

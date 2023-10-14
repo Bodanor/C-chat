@@ -54,6 +54,7 @@ void send_on_button_clicked(GtkButton *b, gpointer user_data)
 {
     int error_status;
     const gchar *message;
+    char *sended_string;
 
     message = gtk_entry_get_text(GTK_ENTRY(InputMessage));
 
@@ -63,7 +64,8 @@ void send_on_button_clicked(GtkButton *b, gpointer user_data)
         clear_ping();
     }
     else {
-        append_to_history((const char*)message);
+        sended_string = append_username("You", (const char*)message); /* How can I verify that i succeedes. What should I do ? */
+        append_to_history(sended_string);
     }
 
     gtk_entry_set_text(GTK_ENTRY(InputMessage), ""); /* Clear the Input entry */
@@ -132,6 +134,7 @@ static void *_recv_function()
         if (error_status < 0) {
             disconnected_status();
             clear_ping();
+            break;
         }
         else {
             append_to_history((const char*)msg->data);

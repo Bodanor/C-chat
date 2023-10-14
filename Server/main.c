@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 
 #include "chat.h"
 #include "sockets.h"
@@ -40,6 +41,8 @@ int main(int argc, char **argv)
     int client_socket;
     int server_socket;
     pthread_t client_thread;
+
+    signal(SIGPIPE, SIG_IGN); /* Ignore the SIGPIPE signal as we handle it by deleting the pid of the user */
 
     if ((server_socket = create_server()) == -1) {
         printf("[SERVER] Initialization failed !\n");

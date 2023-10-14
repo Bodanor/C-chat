@@ -7,5 +7,5 @@
 #include <ctype.h>
 
 int check_is_number(const char *string);
-
+char *append_username(const char *username, const char *buffer);
 #endif // __UTIL_H_
