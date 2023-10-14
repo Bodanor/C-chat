@@ -82,41 +82,36 @@ int add_client(int client_socket, pthread_t client_thread)
     return 0;
 }
 
-
+/* 0 : succes
+ *-1 : fail */
 int delete_client(int client_socket)
 {
-    Client *client_tmp;
-    Client *previous_client_tmp;
+    Client * current;
+    Client *previous;
 
-    pthread_mutex_lock(&server->linked_client_list_lock); /* Lock the mutex */
+    current = server->connected_clients;
+    previous = NULL;
 
-    client_tmp = server->connected_clients;
-    while (client_tmp != NULL && client_tmp->client_socket != client_socket) {
-        previous_client_tmp = client_tmp;
-        client_tmp = client_tmp->next_client;
-    }
-
-    /* Has the client_socket been found ? */
-    if (client_tmp == NULL) {
-        pthread_mutex_unlock(&server->linked_client_list_lock); /* Release the mutex */
+    if (current == NULL)
         return -1;
+
+    while (current!= NULL && current->client_socket != client_socket) {
+        previous = current;
+        current = current->next_client;
     }
+    if (current != NULL && previous == NULL){
+        server->connected_clients = NULL;
+    }
+   else if (previous != NULL)
+        previous->next_client = current->next_client;
+   else
+       return -1;
 
-    /*
-     ** From here, the client_socket has been found !
-     ** Has a username been already assigned ? If yes free it !
-    */
-    if (client_tmp->username != NULL)
-        free(client_tmp->username);
-
-    /* Assign the next client to the next one, skipping the one we are about to delete/free */
-    previous_client_tmp = previous_client_tmp->next_client;
-    free(client_tmp); /* Free the client memory !*/
-
-    pthread_mutex_unlock(&server->linked_client_list_lock); /* Release the mutex */
-
+    free(current);
     return 0;
 }
+
+
 
 void broadcast_message(int client_src_socket, Message *client_message)
 {
@@ -130,9 +125,6 @@ void broadcast_message(int client_src_socket, Message *client_message)
     while (tmp_ptr != NULL) {
         if (tmp_ptr->client_socket != client_src_socket) { /* Avoid sending the message back to the original socket */
             if ((send_error = Send_msg(tmp_ptr->client_socket, client_message->data, client_message->data_size)) < 0) {
-                pthread_mutex_unlock(&server->linked_client_list_lock); /* Release the mutex */
-                delete_client(tmp_ptr->client_socket);
-                pthread_mutex_lock(&server->linked_client_list_lock); /* Lock the mutex */
             }
         }
         tmp_ptr = tmp_ptr->next_client;
