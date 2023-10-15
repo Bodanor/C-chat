@@ -90,24 +90,27 @@ int delete_client(int client_socket)
     Client *previous;
 
     current = server->connected_clients;
-    previous = NULL;
+    previous = current;
 
-    if (current == NULL)
-        return -1;
-
-    while (current!= NULL && current->client_socket != client_socket) {
-        previous = current;
-        current = current->next_client;
+    /* If first element, free the element and assign the head to be NULL */
+    if (current != NULL && client_socket == current->client_socket) {
+        if (current->username != NULL)
+            free(current->username);
+        server->connected_clients = current->next_client;
     }
-    if (current != NULL && previous == NULL){
-        server->connected_clients = NULL;
-    }
-   else if (previous != NULL)
+    else {
+        while (current != NULL && client_socket != current->client_socket) {
+            previous = current;
+            current = current->next_client;
+        }
+        if (current == NULL)
+            return -1;
         previous->next_client = current->next_client;
-   else
-       return -1;
+        if (current->username != NULL)
+            free(current->username);
+        free(current);
 
-    free(current);
+    }
     return 0;
 }
 
