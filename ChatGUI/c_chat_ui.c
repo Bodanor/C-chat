@@ -17,13 +17,15 @@ static pthread_t thread_recv;
 static pthread_mutex_t mutex_history_chat;
 static pthread_mutex_t mutex_ping_label;
 static pthread_mutex_t mutex_status_label;
+static pthread_cond_t cond_add_history;
+static int is_added_to_history = 0;
 
 static void close_button_clicked(void);
 static void *_recv_function();
 static void disconnected_status(void);
 static void connected_status(void);
 static void clear_ping(void);
-static void append_to_history(const char *text);
+static gboolean append_to_history(gpointer data);
 static void clear_c_chat_elements(void);
 
 void init_c_chat_window(void)
@@ -46,6 +48,7 @@ void init_c_chat_window(void)
     pthread_mutex_init(&mutex_history_chat, NULL);
     pthread_mutex_init(&mutex_ping_label, NULL);
     pthread_mutex_init(&mutex_status_label, NULL);
+    pthread_cond_init(&cond_add_history, NULL);
 
 }
 
@@ -65,6 +68,7 @@ void send_on_button_clicked(GtkButton *b, gpointer user_data)
     }
     else {
         sended_string = append_username("You", (const char*)message); /* How can I verify that i succeedes. What should I do ? */
+
         append_to_history(sended_string);
     }
 
@@ -137,11 +141,18 @@ static void *_recv_function()
             break;
         }
         else {
-            append_to_history((const char*)msg->data);
+            is_added_to_history = 0;
+            gdk_threads_add_idle(append_to_history, (gpointer)msg->data);
+            pthread_mutex_lock(&mutex_history_chat);
+            while (is_added_to_history == 0)
+                pthread_cond_wait(&cond_add_history, &mutex_history_chat);
+            pthread_mutex_unlock(&mutex_history_chat);
+
             destroyMessage(msg);
         }
-    }
 
+    }
+    pthread_exit(0);
 }
 
 static void disconnected_status(void)
@@ -180,22 +191,30 @@ static void clear_ping(void)
     pthread_mutex_unlock(&mutex_ping_label);
 }
 
-static void append_to_history(const char *text)
+static gboolean append_to_history(gpointer data)
 {
+    const gchar *text;
     GtkTextBuffer *history_buffer;
     GtkTextIter iter;
 
+
     pthread_mutex_lock(&mutex_history_chat);
+
+    text = (const gchar*)data;
 
     history_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(HistoryChat));
     gtk_text_buffer_get_end_iter(history_buffer, &iter);
-    gtk_text_buffer_insert(history_buffer, &iter, (const gchar*)text, -1);
+    gtk_text_buffer_insert(history_buffer, &iter, text, -1);
+    gtk_text_buffer_get_end_iter(history_buffer, &iter);
     gtk_text_buffer_insert(history_buffer, &iter, "\n", -1);
 
     GtkAdjustment *v_adjustment = gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(ScrolledWindow));
     gtk_adjustment_set_value(v_adjustment, gtk_adjustment_get_upper(v_adjustment));
 
+    is_added_to_history = 1;
     pthread_mutex_unlock(&mutex_history_chat);
+    pthread_cond_signal(&cond_add_history);
+
 }
 
 void clear_c_chat_elements(void)

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <gtk-3.0/gtk/gtk.h>
 #include <gtk/gtkx.h>
+#include <gdk/gdk.h>
 
 #include "server_connect_form.h"
 
